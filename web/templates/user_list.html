@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="leo-container">
+        {% csrf_token %}
+        <div class="btn-group" style="margin: 5px 0">
+            <a class="btn btn-default" href="/user/create/">
+                <i class="fa fa-plus-square" aria-hidden="true"></i> Create a User
+            </a>
+            <a class="btn btn-default" href="/user/import/">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i> Batch Import
+            </a>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Last Login</th>
+                <th>Choices</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in data_list %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.gender }}</td>
+                    <td>{{ row.last_login }}</td>
+                    <td>
+                        <a style="color: #333333;" href="/user/update/{{ row.id }}/">
+                            <i class="fa fa-edit" aria-hidden="true"></i></a>
+                        <a style="color: #d9534f;" href="/user/del/{{ row.id }}/"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
